@@ -6,7 +6,7 @@ import scraperwiki
 import urllib2
 from datetime import datetime
 from bs4 import BeautifulSoup
-from dateutil.parser import parse
+#from dateutil.parser import parse
 from bs4 import BeautifulSoup as bs
 import itertools
 # Set up variables
