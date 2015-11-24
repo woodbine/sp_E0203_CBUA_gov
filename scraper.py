@@ -114,6 +114,26 @@ for link in links:
                     csvYr = csvfile[1].strip()
                     csvMth = convert_mth_strings(csvMth.upper())
                     data.append([csvYr, csvMth, url])
+    if '2013' in link['href'] or '2012' in link['href'] or '2011' in link['href'] or '2010' in link['href']:
+        link_csv = 'http://www.centralbedfordshire.gov.uk' + link['href']
+        html_csv = urllib2.urlopen(link_csv)
+        soup_csv = BeautifulSoup(html_csv, 'lxml')
+        links_csv =soup_csv.find('div', id='sublinks').find_all('a',href=True)
+        for l_csv in links_csv:
+            url_link = 'http://www.centralbedfordshire.gov.uk' +l_csv['href']
+            html_csv = urllib2.urlopen(url_link)
+            soup_csv = BeautifulSoup(html_csv, 'lxml')
+            links_csv =soup_csv.find_all('a',href=True)
+            for l_csv in links_csv:
+                if '.csv' in l_csv['href']:
+                    # if 'Transparency' in l_csv['href']:
+                        url = 'http://www.centralbedfordshire.gov.uk' +l_csv['href'].split('#False')[0]
+                        csvfile = l_csv.text.strip().replace(u'\xa0', ' ').split(' ')
+                        csvMth = csvfile[1][:3]
+                        csvYr = csvfile[2].strip()
+                        csvMth = convert_mth_strings(csvMth.upper())
+                        data.append([csvYr, csvMth, url])
+
 
 #### STORE DATA 1.0
 
