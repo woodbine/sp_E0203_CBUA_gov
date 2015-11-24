@@ -126,7 +126,6 @@ for link in links:
             links_csv =soup_csv.find_all('a',href=True)
             for l_csv in links_csv:
                 if '.csv' in l_csv['href']:
-                    # if 'Transparency' in l_csv['href']:
                         url = 'http://www.centralbedfordshire.gov.uk' +l_csv['href'].split('#False')[0]
                         csvfile = l_csv.text.strip().replace(u'\xa0', ' ').split(' ')
                         csvMth = csvfile[1][:3]
